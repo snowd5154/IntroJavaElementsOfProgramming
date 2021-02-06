@@ -1,0 +1,422 @@
+/*Write a program that prints the Hello, World message 10 times*/
+
+public class TenHelloWorlds{
+
+    public static void main(String[] args){
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+        System.out.print("Hello, World");
+        System.out.println();
+    }
+}
+
+/*Modify UseArgument.java to make a program UseThree.java that takes three names and prints out a
+proper sentence with the names in the reverse of the order given, so that, for example, java UseThree Alice,
+Bob, Carol that gives Hi Carol, Bob, and Alice*/
+
+public class UseArguments
+{
+    public static void main(String[] args)
+    {
+        System.out.print("Hi ");
+        System.out.print(args[0]+" ");
+        System.out.print(args[1]+" ");
+        System.out.print(args[2]+" ");
+        System.out.print(", How are you?");
+    }
+}
+
+/*Algebra Problems(Correct syntax exercise)*/
+public class AlgebraicProblems {
+
+    public static void main(String arg[]) {
+        System.out.println(2 + "bc"); //2+bc
+        System.out.println(2 + 3 + "bc"); //5+bc
+        System.out.println((2 + 3) + "bc"); //5 + bc
+        System.out.println("bc" + (2 + 3)); //bc + 5
+        System.out.println("bc" + 2 + 3); //bc + 5
+    }
+}
+
+/*Pre-Algebra Problems*/
+
+public class PreAlgebraProblems {
+
+    public static void main(String[] args)
+
+    {
+
+        double a = 3.14159;
+
+        System.out.println(a);
+        System.out.println(a + 1);
+        System.out.println(8 / (int) a); // double is converted in to int. So values after decimal will not print after division.
+        System.out.println(8 / a);
+        System.out.println((int) (8 / a)); // first the division is performed then the result will converted in to int so the output will be 2.
+
+    }
+
+}
+
+/*Loan payments. Write a program taht calculates the monthly payments you would have to make over a given number
+of years to pay off a loan at a given interest rate compounded continuously, taking the number of years, t, the
+principal p, and the annual interest rate r as command-line arguments. The desired value is gviven by the formula Pe^rt.
+Use Math.exp()*/
+
+public class LoanPayment {
+
+public static void main(String args[]){
+
+    //initial value deposited
+
+    double p = Double.parseDouble(arg[0]);
+
+    //time in years
+
+    double t = Double.parseDouble(arg[1]);
+
+    //annual interest rate
+
+    double r = Double.parseDouble(arg[2]);
+
+    //calculate rate %
+
+    r = r/100;
+
+    //calculate compound interest
+
+    double compounded = p * Math.exp(r*t);
+
+    //calculate monthly capital value
+
+    double monthly = monthlyCapital + compounded/(t*12);
+
+    //calculate months
+
+    int months = (int)(t*12.0);
+    for(int i = 0; i < months; i++;){
+        p = p - monthlyCapital;
+
+        //print the values
+
+        System.out.println("Month %2d payment %.2f remaining principal %.2f interest %.2f, i+1 , monthly, p, compounded / (t*12));");
+        System.out.println();
+    }
+
+}
+
+}
+
+/*Wind Chill. Given the temperature t (in Fahrenheit) and the wind speed v(in miles per hour), the National Weather Service
+defines teh effeective temperature (the wind chill) to be: w = 35.74 + 0.6215t + (0.4275t - 35.75)v^0.16
+
+import java.util.*;
+import java.lang.*;
+
+public class WindChill
+{
+    public static double GetWindChill(double T, double V)
+    {
+        double W=35.74 + 0.6215 * T - 35.75 * Math.pow(V, 0.16) + 0.4275 * T * Math.pow(V, 0.16);
+        return W;
+    }
+    public static void main(String [] args)
+    {
+        if(args.length != 2)
+        {
+            System.out.println("Invalid number of arguments.");
+            return;
+        }
+        double temperature = Double.parseDouble(args[0]);
+        double mph = Double.parseDouble(args[1]);
+        System.out.println("The windchill factor is: " + GetWindChill(temperature, mph));
+    }
+}
+
+    /***************************************************************************
+     *  Given the month, day, and year, return which day
+     *  of the week it falls on according to the Gregorian calendar.
+     *  For month, use 1 for January, 2 for February, and so forth.
+     *  Returns 0 for Sunday, 1 for Monday, and so forth.
+     ***************************************************************************/
+    
+    public class DatePredictor {
+    
+    public static int day(int month, int day, int year) {
+        int y = year - (14 - month) / 12;
+        int x = y + y/4 - y/100 + y/400;
+        int m = month + 12 * ((14 - month) / 12) - 2;
+        int d = (day + x + (31*m)/12) % 7;
+        return d;
+    }
+
+    // return true if the given year is a leap year
+    public static boolean isLeapYear(int year) {
+        if  ((year % 4 == 0) && (year % 100 != 0)) return true;
+        if  (year % 400 == 0) return true;
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int month = Integer.parseInt(args[0]);    // month (Jan = 1, Dec = 12)
+        int year = Integer.parseInt(args[1]);     // year
+
+        // months[i] = name of month i
+        String[] months = {
+                "",                               // leave empty so that months[1] = "January"
+                "January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"
+        };
+
+        // days[i] = number of days in month i
+        int[] days = {
+                0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+        };
+
+        // check for leap year
+        if (month == 2 && isLeapYear(year)) days[month] = 29;
+
+
+        // print calendar header
+        System.out.println("   " + months[month] + " " + year);
+        System.out.println(" S  M Tu  W Th  F  S");
+
+        // starting day
+        int d = day(month, 1, year);
+
+        // print the calendar
+        for (int i = 0; i < d; i++)
+            System.out.println("   ");
+        for (int i = 1; i <= days[month]; i++) {
+            System.out.printf("%2d ", i);
+            if (((i + d) % 7 == 0) || (i == days[month])) System.out.println();
+        }
+
+    }
+}
+
+/*Write a more general and more boust version of Quadratic that prints the roots of the plynomial ax^2 + bx + c,
+prints an appropriate message if the discriminaant is negative, and behaves appropriately (avoiding division by zero) if a is zero.
+
+public class QuadraticFormula {
+
+    public static void main(String[] args) {
+
+        double a = Double.parseDouble(args[0]); //input a
+        double b = Double.parseDouble(args[1]); //input b
+        double c = Double.parseDouble(args[2]); //input c
+
+        //calculate discriminate by formula b*b-4ac
+
+        double di = b * b - 4.0 * a * c;
+
+        //check the condition
+
+        if (di < 0 || a == 0) {
+
+            System.out.println("discriminate is " + "negative or a is zero kindly " + "insert real numbers");
+
+        } else {
+
+            //calculate root1 and root2 using
+            //formula and print
+
+            double sqroot = Math.sqrt(di);
+            double root1 = (-b + sqroot) / (2.0 * a);
+            double root2 = (-b - sqroot) / (2.0 * a);
+            System.out.println(root1);
+            System.out.println(root2);
+        }
+    }
+}
+
+/* Rewrite TenHellos to make a program Hellos that takes the number of lines to print as a command-line argument.
+You may assume that the argument is less than 1000. Hint: Use i % 10 and i % 100 to determine when to use st, 
+nd, rd, or th for printiing the ith Hello*/
+
+public class TenHellos
+{
+    public static void main(String[] args)
+    {
+        //Check for argument count to be zero
+        if (args.length == 0)
+        {
+            System.out.println("\nPlease pass number of lines to print...\n\n");
+            return;
+        }
+
+        //Consider the argument and store in variable
+        int count = Integer.parseInt(args[0]);
+
+        //If value stored is not between 1 and 1000
+        if (count < 1 || count > 1000)
+        {
+            System.out.println("\nValue should be between 1 to 1000 \n");
+            return;
+        }
+
+        System.out.println("\n\n");
+
+        //Printing given number of hellos
+        for(int i=1; i<=count; i++)
+            System.out.printf("\t %6s %10s \n", addPrefix(i), " Hello ");
+    }
+
+    //Method that adds prefix to hello
+    public static String addPrefix(int i)
+    {
+        //Get remainder when divided by 100
+        int rem = i % 100;
+
+        //If remainder is 11 or 12 or 13
+        if(rem==11 || rem==12 || rem== 13)
+            return i + "th";
+
+        //Get remainder when divided by 10
+        int rem2 = i % 10;
+
+        //Assign prefixes as per remainder values
+        if(rem2==1)
+            return i + "st";
+        else if(rem2==2)
+            return i + "nd";
+        else if(rem2==3)
+            return i + "rd";
+        else
+            return i + "th";
+    }
+}
+
+/*The following program will give the values using
+the harmonic numbers formula
+*/
+
+//using for(int i = 1; i <= N; i++) sum += 1 / (i*i);
+
+public class HarmonicNumbers {
+
+    public static void main(String[] args){
+
+        int N = Integer.parseInt(args[0]);
+        double sum = 0.0;
+        for(int i = 1; i <= N; i++){
+
+            //Add the ith term to the sum
+
+            sum += 1.0/i;
+
+        }
+
+        System.out.println(sum);
+
+    }
+
+}
+
+//using for(int i = 1; i <= N; i++) sum += 1 / (1.0*i*i);
+
+public class HarmonicNumbers{
+
+        public static void main(String[] args) {
+            double sum = 0.0;
+            int n = 1000000;
+            for(int i = 1; i <= n; i++)
+                sum += 1 / (1.0 * i * i);
+            System.out.print(sum);
+        }
+    }
+    
+    /Modify Gambler to take an extra command-line argument that specifies the (fixed) probability that the gambler wins each bet. Use your program to try 
+    to learn how this probability affect the chance of winning and the expected number of bets. Try a value of p close to 0.5 (say, .48).*/
+    
+    public class GamblerProblem {
+
+    public static void main(String[] args) {
+        //Run T experiments that start with stake and terminate on 0 or goal
+        int stake = Integer.parseInt(args[0]);
+        int goal = Integer.parseInt(args[1]);
+        int T = Integer.parseInt(args[2]);
+
+        //Pass the probability of type double
+        double prob = Double.parseDouble(args[3]);
+
+        //declare local variables
+
+        int bets = 0;
+        int wins = 0;
+
+        //Using for loop to iterate t value up to T
+        for (int t = 0; t < T; t++) {
+            int cash = stake;
+            while (cash > 0 && cash < goal) {
+                //Simulating one bet
+                bets++;
+                if (Math.random() < prob)
+                    cash++;
+                else
+                    cash--;
+            }
+            if (cash >= goal)
+                wins++;
+        }
+        //Print values
+        System.out.println(100 * wins / T + "% wins");
+        System.out.println("Avg # bets: " + bets / T);
+    }
+}
+
+/*Checksum. The International Standard Book NBumber (ISBNM) is a 10-digit code taht uniquely specifies a book. The rightmost
+digit is a checksum digit that can be uniquelydetermined from teh other 9 digits, from the condition that d1 + 
+2d2 +  3d3 + .. + 10d10 must be a multiple of 11 (here di denotes the ith digit from the right). The checksum digit di can be any value from 0 to 10. The ISBN
+convention is to use the character 'X' to denote 10. Example: the checksum digit corresponding to 020131452 5 since 5 is the only value of x between 0 and 10 for which
+10*0 + 9*2 + 8*0 + 7*1 + 6*3 + 5*1 + 4*4 + 3*5 + 2*2 + 1*x
+is a multiple of 11. Write a program that takes a 9-digit integer as a command-line argument, computes the checksum, and prints out the ISBN number*/
+
+public class IsbnProgram {
+
+    public static void main(String args[]) {
+        //Accept the value of 9-digit number n
+
+        int n = Integer.parseInt(args[0]);
+        int isbn = n;
+        int sum = 0;
+        //Use the digits and calculate the sum as d1 + 2d2..10d10
+
+        for (int i = 8; i >= 0; i--) {
+            int digit = n / (int) Math.pow(10, i);
+            sum += (i + 2) * digit;
+            n = n - (int) Math.pow(10, i) * digit;
+        }
+        //print the sum
+        System.out.println(sum);
+        //check how much has to be added for it to be divisible by 11*/
+        int difference = (11 - (sum % 11)) % 11;
+
+        //print the ISBN number.
+        System.out.print(isbn + "-");
+        if (difference < 10)
+            System.out.println(difference);
+        else
+
+            //print X if difference is 10.
+            System.out.println("X");
+    }
+}
