@@ -420,3 +420,219 @@ public class IsbnProgram {
             System.out.println("X");
     }
 }
+
+/*Write a program that declares and initializes an array a[] of size 1000 and
+accesses a[1000]. Does your program compile? What happens when you run it?*/
+
+public class ArrayOneThousand {
+
+    public static void main(String args[]){
+
+        int N = 1000; // size of array
+        int[] a; // declare an array
+        a = new int[N];
+
+    }
+
+}
+
+//Array Code Fragments
+
+/*public class ArrayCodes {
+
+    public static void main(String args[]){
+
+        int[] a = new int[1];
+        for(int i = 0; i < 10; i++)
+            a[i] = 9-i;
+        for(int i = 0; i < 10; i++)
+            a[i] = a[a[i]];
+        for(int i = 0; i < 10; i++)
+            System.out.println(a[i]);
+
+    }
+
+}*/
+
+public class ArrayCodes {
+
+    public static void main(String args[]){
+
+        int N = 10;
+        int[] a = new int[N];
+        a[0] = 1;
+        a[1] = 1;
+        for(int i = 2; i < N; i++)
+            a[i] = a[i-1] + a[i-2];
+        for(int i = 0; i < N; i++)
+            System.out.print(a[i]+" ");
+
+    }
+}
+
+/*public class ArrayCodes {
+
+    public static void main(String args[]){
+
+        int[] a = { 1, 2, 3 };
+        int[] b = { 1, 2, 3 };
+        System.out.println(a == b);
+
+    }
+}*/
+
+/*Write a code fragment to print the transposition (rows and columns
+changed) of a square two-dimensional array. For the example spreadsheet array in
+the text*/
+
+public class TwoDTranspositionalArray {
+
+    public static void main(String args[]){
+
+        int N = Integer.pareInt(args[]);
+
+        //Create the square source array and give random values.
+        int[][] a = new int[N][N];
+        for(int i = 0; i<N; i++)
+            for(int j = 0; j<N; j++)
+                a[i][j] = (int)(Math.random() * N);
+
+            //print the source array
+            System.out.println("Source array");
+            for(int i = 0; i < N; i++){
+                for(int j = 0; j < N; j++)
+                    System.out.println(a[i][j] + " ");
+                System.out.println();
+            }
+
+            //Print the transposition of the array
+
+        System.out.println("Transposed array");
+            for(int i = 0; i < N; i++){
+                for(int j = 0; j < N; j++);
+                System.out.print(a[j][i] + " ");
+                System.out.println();
+            }
+
+    }
+
+}
+
+/*Minima in permutations. Write a program that takes an integer N from
+the command line, generates a random permutation, prints the permutation,
+prints the number of left-to-right minima in the permutation (the number of times
+an element is the smallest seen so far). The write a program that takes integers M
+and N from the command line, generates M random peremutations of size N, and
+prints the average number of left-to-right minima in the permutations generated*/
+
+import java.util.Scanner;
+
+public class MinimaPermutations {
+
+    public static void main(String args[]){
+
+        Scanner Keyboard = new Scanner(System.in);
+        int M;
+        int N;
+        int O;
+        int [] perm;
+        System.out.print("Enter # of Random Permutations: ");
+        M = Keyboard.nextInt();
+        System.out.println("Enter range of permutation: ");
+        N = Keyboard.nextInt();
+        System.out.print("Enter size of permutation (size must be smaller than range!): ");
+        O = Keyboard.nextInt();
+        for(int k = 0; k < M; k++) {
+            perm = new int[N];
+            for (int h = 0; h < N; h++) {
+                perm[h] = h;
+            }
+            for (int i = 0; i < 0; i++) {
+                int r = i + (int) (Math.random() * (N - i));
+                int e = perm[r];
+                perm[r] = perm[i];
+
+                perm[i] = e;
+            }
+            for (int h = 0; h < 0; h++) {
+                System.out.print(perm[h] + " ");
+            }
+            System.out.println();
+            int count = 0;
+            int left = Integer.MAX_VALUE;
+            int mid = Integer.MAX_VALUE;
+            int right = Integer.MAX_VALUE;
+
+            while (count < 0) {
+                //increment by 1 or count++
+                left = mid;
+                mid = right;
+                right = perm[count];
+                if (right > mid && mid < left) {
+                    System.out.println("Local Min: " + mid);
+                }
+                count++;
+            }
+            if (count > 1 && right < mid) {
+                System.out.println("Local Min: " + right);
+            }
+        }
+    }
+}
+
+/*Binomial coeficients. Write a program that builds and prints a two-dimensional
+ragged array a such that a[N][k] contains the probability that you get exactly
+k heads when you toss a coin N times. Take a command-line argument to specify the
+maximum value of N. These numbers are known as the binomial distribution: if you 
+multiply each entry in row i by 2^N, you get the binomial coefficients (the coefficients
+of x^k in (x+1)^N) arranged in Pascal's triangle. To compute tehm, start with a[N][0]
+= 0 for all N and a[1][1] = 1, then compute values in successive rowns, left to right 
+with a[N][k] = (a[N-1][k] + a[N-1][k-1])/2.*/
+
+import java.util.*;
+
+public class BinomialCoefficients {
+
+    public static void main(String args[]) {
+
+        //N Value
+
+        int N = Integer.parseInt(args[0]);
+
+        //Declare ragged array a.
+        
+        double[][] a = new double[N + 1][];
+        for (int i = 0; i <= N; i++){
+            a[i] = new double[i + 2];
+            a[i][0] = 0.0;
+            a[i][i + 1] = 0.0;
+
+        }
+
+        a[1][1] = 1.0;
+
+        //Calculate binomial distribution.
+
+        for (int i = 2; i <= N; i++) {
+            for (int k = 1; k < a[i].length - 1; k++) {
+                a[i][k] = (a[i - 1][k] + a[i - 1][k - 1]) / 2.0;
+            }
+        }
+
+        //print the binomial distribution
+        System.out.println("Binomial distribution array:");
+        System.out.println();
+
+        //Calculate binomial coefficients and print
+        for (int i = 1; i <= N; i++)
+            for (int j = 1; j < a[i].length - 1; j++)
+                a[i][j] *= Math.pow(2, i - 1); //whatever the # is = to will be multiplied by (pow 2, i-1)
+        System.out.println("Binomial coefficients array: ");
+        System.out.println();
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j < a[i].length - 1; j++)
+                System.out.print(a[i][j] + " ");
+            System.out.println();
+        }
+    }
+    }
