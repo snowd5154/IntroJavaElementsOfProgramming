@@ -636,3 +636,350 @@ public class BinomialCoefficients {
         }
     }
     }
+
+/*The following program will give the values using
+the harmonic numbers formula
+*/
+
+//using for(int i = 1; i <= N; i++) sum += 1 / (i*i);
+
+public class HarmonicNumbers {
+
+    public static void main(String[] args){
+
+        int N = Integer.parseInt(args[0]);
+        double sum = 0.0;
+        for(int i = 1; i <= N; i++){
+
+            //Add the ith term to the sum
+
+            sum += 1.0/i;
+
+        }
+
+        System.out.println(sum);
+
+    }
+
+}
+
+//using for(int i = 1; i <= N; i++) sum += 1 / (1.0*i*i);
+
+public class HarmonicNumbers{
+
+        public static void main(String[] args) {
+            double sum = 0.0;
+            int n = 1000000;
+            for(int i = 1; i <= n; i++)
+                sum += 1 / (1.0 * i * i);
+            System.out.print(sum);
+        }
+    }
+
+java Dragon < input.txt | java Dragon | java Dragon
+
+public class JavaDragon {
+
+    public static void main(String[] args)
+    {
+        String dragon = StdIn.readString();
+        String nogard = StdIn.readString();
+        StdOut.print(" ");
+        StdOut.print(dragon + "R" + nogard);
+        StdOUt.println();
+    }
+}
+
+package code;
+
+import java.util.Scanner;
+
+public class DistanceFormula {
+
+    public static double squareDistance(int[] p1, int[] p2) {
+        if (p1.length != 3 || p2.length != 3) {
+            throw new IllegalArgumentException("Invalid points!");
+        }
+
+        return (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1]) + (p1[2] - p2[2]) * (p1[2] - p2[2]);
+    }
+
+    public static void main(String[] args) {
+
+        // Verifying if proper number of arguments are passed
+        if (args.length != 3) {
+            System.out.println("\nInvalid Usage!\nProvide only 3 arguments...\n");
+            return;
+        }
+
+        int[] pos = new int[args.length];
+
+        // Verifying validity of arguments passed
+        try {
+            int i = -1;
+
+            for (String arg : args) {
+                pos[++i] = Integer.parseInt(arg);
+            }
+
+        } catch (NumberFormatException ex) {
+            System.out.println("\nInvalid Usage!\nProvide only integer arguments...\n");
+            return;
+        }
+
+        Scanner keyboard = new Scanner(System.in);
+        int numPoints;
+
+        // Asking user for number points
+        System.out.print("\nEnter number of points: ");
+        numPoints = Integer.parseInt(keyboard.nextLine().strip());
+
+        int[][] points = new int[numPoints][3];
+
+        for (int i = 0; i < points.length; ++i) {
+            System.out.println("\nEnter data of point " + (i + 1));
+
+            System.out.print("-> x: ");
+            points[i][0] = Integer.parseInt(keyboard.nextLine().strip());
+
+            System.out.print("-> y: ");
+            points[i][1] = Integer.parseInt(keyboard.nextLine().strip());
+
+            System.out.print("-> z: ");
+            points[i][2] = Integer.parseInt(keyboard.nextLine().strip());
+        }
+
+        double leastDistance = Double.MAX_VALUE;
+        int leastIndex = -1;
+
+        for (int i = 0; i < points.length; ++i) {
+            double dist = squareDistance(pos, points[i]);
+
+            if (dist < leastDistance) {
+                leastIndex = i;
+                leastDistance = dist;
+            }
+        }
+
+        System.out.println("\nThe point closest to (" + pos[0] + ", " + pos[1] + ", " + pos[2] + ")");
+        System.out.println("\tis (" + points[leastIndex][0] + ", " + points[leastIndex][1] + ", " + points[leastIndex][2] + ")");
+
+    }
+
+}
+
+/*Spirographs. Write a program that takes three parameters R, r and a from
+the command line and draws the resulting spirograph. A spirograph (technicially,
+an epicycloid) is a curve formed by rolling a circle of radius r around a larger fixed
+circle of radius R. If the pen offset from the center of the rolling circle is (r + a) the
+equation of the resulting curve at time t is given by*/
+
+x(t) = (R + r) cos(t) - (r + a) cos ((R + r)t/r)
+y(t) = (R + r) sin(t) - (r + a) sin ((R + r)t/r)
+
+public class Spirographs {
+
+    public static void main(String[] args){
+        //accept the values of R, r and a.
+
+        double R = Double.parseDouble(args[0]);
+        double r = Double.parseDouble(args[1]);
+        double a = Double.parseDouble(args[2]);
+
+        //set the scales
+
+        StdDraw.setXscale(-2.0 * R, 2.0*R);
+        StdDraw.setYscale(-2.0 * R, 2.0*R);
+        double t = 0.0;
+
+        //calculate points (x, y) by using formula.
+        //t will be applied up to 20.0 on the graph with the set scales done above
+        while(t < 20.0*Math.PI){
+            double x = (R + r)*Math.cos(t) - (r + a) * Math.cos((R+r) *t/r);
+            double y = (R + r)*Math.sin(t) - (r + a) * Math.sin((R+r) *t/r);
+
+            //draw the points (x, y)
+            StdDraw.point(x,y);
+            t+=0.002;
+        }
+    }
+}
+
+
+/*Bouncing ball with gravity. Modify BouncingBall to incorporate gravity
+in the vertical direction. Add calls to StdAudio.play() to add one sound effect when
+the ball hits a wall and a different one when it hits the floor.*/
+
+public class BouncingBallGravity {
+
+    public static void main(String args[]){
+
+        //set the scales
+
+        StdDraw.setXscale(-1.0, 1.0); //StdDraw.setscale is to set the scale for the drawing (or image)
+        StdDraw.setYscale(-1.0, 1.0);
+
+        //Simulate the movement of a bouncing ball
+
+        double rx = 0.480, ry = 0.860;
+        double ry = 0.015, vy = 0.023;
+
+        //set the radius of ball
+
+        double radius = 0.05;
+        double gravityX = vx/10.0;
+        double gravityY = vy/10.0;
+
+        //read the file laser.wav
+
+        double[] sound = StdAudio.read("laser.wav"); //Std Audio-programming the sfx, .wav is the file
+
+        while(true){
+            //Update ball position and draw.
+
+            if(Math.abs(rx + vx) + radius > 1.0){
+                vx = -vx;
+
+                //play sound when ball touches the wall
+
+                StdAudio.play(sound);
+                if(Math.abs(vx) < 0.001)
+                    break; //break is separate this part of the function and move on to the next
+            }
+            if(Math.abs(ry + vy) + radius > 1.0) {
+                vy = -vy;
+
+                //play sound when ball touches the ground.
+
+                StdAudio.play(sound);
+                if (Math.abs(vy) < 0.001)
+                    break;
+            }
+            //draw the bouncing ball gravity.
+
+            rx = rx + vx;
+            ry = ry + vy;
+            StdDraw.clear(); //to give a light gray color
+            StdDraw.filledCircle(rx, ry, radius);
+            StdDraw.show(20);
+            vx *= 1.0 - gravityX; //for whatever result x is, it will be multiplied by (1.0-gravityX)
+            vy *= 1.0 - gravityY; //for whatever result y is, it will be multiplied by (1.0-gravityY)
+            }
+        }
+    }
+    
+    /*Modify Transition to take the leap probability from the command line
+    and use your modified version to examine the effect on page ranks of switching to
+    an 80-20 or 95-5 rule.*/
+    
+    public class ModifyTransition {
+
+    public static void main(String args[]){
+
+        //accept the value of probability
+
+        double probability = Double.parseDouble(args[0]);
+
+        //accept random-surfer probabilities.
+
+        int N = Integer.parseInt(args[1]);
+        int[][] counts = new int[N][N];
+        int[] outDegree = new int[N];
+        int n =args.length;
+
+        //accumulate link counts
+
+        int a = integer.parseInt(args[2]);
+        int b = integer.parseInt(args[3]);
+        counts[a][b]++;
+        outDegree[a]++;
+        System.out.println(N + " " + N);
+
+        for(int i = 0; i < N; i++){
+            //Print probability distribution for row i.
+
+            for(int j = 0; j < N; j++) {
+                //Print probability for column j.
+
+                double p = probability * counts[a][b] / outDegree[a] + (1.0 - probability) / N;
+                System.out.println(p);
+            }
+            System.out.println();
+            }
+        }
+    }
+    
+/*Modify Transition to handle pages with no outgoing links, by filling rows corresponding to such
+pages with the value 1/N
+*/
+public class ModifyTransition2 {
+
+    public static void main(String args[]){
+        //accept random-surfer probabilities
+
+        int R = Integer.parseInt(args[0]);
+        int[][] counts = new int[R][R];
+        int[] outDegree = new int[R];
+        int n = args.length;
+
+        //Accumulate link counts.
+
+        int a = Integer.parseInt(args[1]);
+        int b = Integer.parseInt(args[2]);
+
+        if(counts[a][b] == 0) {
+            counts[a][b]++;
+            outDegree[a]++;
+        }
+        System.out.println(R + " " + R);
+        for(int i = 0; i < R; i++){
+            //probability distribution for row i
+            for(int j = 0; j < R; j++) {
+                //probability for column j.
+                double p = 0.90 * counts[a][b] / outDegree[a] + 0.10 / R;
+
+                //print the matrix
+                System.out.print(p + " ");
+            }
+            System.out.println();
+
+            }
+        }
+    }
+
+/*Determine, to within a factor of 10, the number of iterations required by
+RandomSurfer to compute page ranks to four decimal places and to five decimal
+places for tiny.txt*/
+
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Scanner;
+
+public class Tinytext1{
+    public static void main(String args[]){
+        Document document = new Document();
+        Scanner sc=new Scanner(System.in);
+        try {
+            PdfWriter.getInstance(document,new FileOutputStream("tiny.pdf"));
+            document.open();
+            System.out.println("Enter your text");
+            String text=sc.next();
+            Chunk tiny = new Chunk(text);
+            tiny.setTextRise(-5f);
+            document.add(tiny);
+            document.close();
+            System.out.println("Successfully wrote to file");
+        }
+        catch (DocumentException e) {
+            e.printStackTrace();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+
